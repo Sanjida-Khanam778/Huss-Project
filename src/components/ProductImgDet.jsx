@@ -159,7 +159,7 @@ export const ProductImgDet = ({ product, isLoading }) => {
           </button>
           <button
             onClick={handleAddToCart}
-            className="bg-black px-4 py-2.5 rounded-lg font-bold text-base w-full min-[420px]:w-1/3"
+            className="bg-[#0B1C3C] px-4 py-2.5 rounded-lg font-bold text-base w-full min-[420px]:w-1/3"
           >
             Buy Now
           </button>

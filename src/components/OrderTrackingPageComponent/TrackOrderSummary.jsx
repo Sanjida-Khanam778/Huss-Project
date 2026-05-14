@@ -69,7 +69,7 @@ export const TrackOrderSummary = () => {
         </p>
       </div>
 
-      <div className="w-full bg-[#FAF8F2] p-4 rounded-xl">
+      <div className="w-full p-4 rounded-xl">
         <div className="mb-2 flex items-center gap-2">
           <img src={van} alt="" />
           <h1 className="font-medium text-sm">Delivery Info</h1>

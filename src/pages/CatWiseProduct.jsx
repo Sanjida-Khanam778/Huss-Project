@@ -78,7 +78,7 @@ const CatWiseProduct = () => {
 
   if (isLoading) {
     return (
-      <div className="py-6 px-4 sm:px-6 lg:px-8 xl:px-28 bg-[#FAF8F2] min-h-screen flex items-center justify-center">
+      <div className="py-6 px-4 sm:px-6 lg:px-8 xl:px-28 min-h-screen flex items-center justify-center">
         <p className="text-xl font-medium">Loading products...</p>
       </div>
     );
@@ -86,7 +86,7 @@ const CatWiseProduct = () => {
 
   if (isError) {
     return (
-      <div className="py-6 px-4 sm:px-6 lg:px-8 xl:px-28 bg-[#FAF8F2] min-h-screen flex items-center justify-center">
+      <div className="py-6 px-4 sm:px-6 lg:px-8 xl:px-28 min-h-screen flex items-center justify-center">
         <div className="text-center">
           <p className="text-xl font-medium text-red-600 mb-4">
             Failed to load products
@@ -104,7 +104,7 @@ const CatWiseProduct = () => {
 
   if (!products || products.length === 0) {
     return (
-      <div className="py-6 px-4 sm:px-6 lg:px-8 xl:px-28 bg-[#FAF8F2] min-h-screen flex items-center justify-center">
+      <div className="py-6 px-4 sm:px-6 lg:px-8 xl:px-28 min-h-screen flex items-center justify-center">
         <div className="text-center">
           <p className="text-xl font-medium mb-4">
             No products found in this category
@@ -121,7 +121,7 @@ const CatWiseProduct = () => {
   }
 
   return (
-    <div className="py-6 px-4 sm:px-6 lg:px-8 xl:px-28 bg-[#FAF8F2] min-h-screen">
+    <div className="py-6 px-4 sm:px-6 lg:px-8 xl:px-28 min-h-screen">
       <ScrollRestoration />
 
       <div className="max-w-7xl mx-auto">

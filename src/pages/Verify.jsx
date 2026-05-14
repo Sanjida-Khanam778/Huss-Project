@@ -83,7 +83,7 @@ const Verify = ({ email }) => {
       {!isVerified ? (
         <div>
           {/* Breadcrumb */}
-          <div className="w-full bg-[#f9f6ee] px-4 sm:px-8 md:px-16 lg:px-28 py-3 text-left text-sm text-black font-medium">
+          <div className="w-full px-4 sm:px-8 md:px-16 lg:px-28 py-3 text-left text-sm text-black font-medium">
             <span className="text-gray-600 font-medium text-lg sm:text-xl">
               Account /{" "}
             </span>

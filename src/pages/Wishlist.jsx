@@ -3,7 +3,7 @@ import MyWishlist from "../components/MyWishlist";
 
 export const Wishlist = () => {
   return (
-    <div className="w-full bg-[#f9f6ee] px-4 sm:px-6 lg:px-8 xl:px-28 py-3 min-h-screen">
+    <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-28 py-3 min-h-screen">
       {/* Breadcrumb */}
       <div className="text-left font-medium">
         <span className="text-gray-600 text-lg sm:text-xl">Account / </span>

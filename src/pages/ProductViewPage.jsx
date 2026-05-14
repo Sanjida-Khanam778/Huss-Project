@@ -14,7 +14,7 @@ export default function ProductViewPage() {
   const [addReview, { isLoading: isSubmitting }] = useAddReviewMutation();
 
   const [showReviewBox, setShowReviewBox] = useState(false);
-  const [activeTab, setActiveTab] = useState("specifications");
+  const [activeTab, setActiveTab] = useState("description");
   const [formData, setFormData] = useState({
     review: "",
     photo: null, // file object
@@ -71,7 +71,7 @@ export default function ProductViewPage() {
 
   if (error) {
     return (
-      <div className="bg-[#fdfaf6] min-h-screen flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-red-500 mb-4">
             Oops! Error loading product.
@@ -85,7 +85,7 @@ export default function ProductViewPage() {
   }
 
   return (
-    <div className="bg-[#fdfaf6] text-[#1c1c1c] px-4 sm:px-6 lg:px-8 xl:px-28 py-6">
+    <div className="text-[#1c1c1c] px-4 sm:px-6 lg:px-8 xl:px-28 py-6">
       <ScrollRestoration />
       {/* Breadcrumb */}
       <div className="text-left font-medium pb-6 text-lg sm:text-xl">
@@ -101,16 +101,7 @@ export default function ProductViewPage() {
         {/* Tabs */}
         <div className="mt-10 rounded-lg bg-white p-2 sm:p-3">
           <div className="flex flex-wrap gap-2 sm:gap-4">
-            <button
-              onClick={() => setActiveTab("specifications")}
-              className={`flex-1 sm:flex-none sm:w-48 h-12 rounded-lg font-bold text-sm sm:text-lg transition-colors ${
-                activeTab === "specifications"
-                  ? "bg-red-500 hover:bg-red-600 text-white"
-                  : "bg-gray-300 hover:bg-gray-400 text-black"
-              }`}
-            >
-              Specifications
-            </button>
+           
             <button
               onClick={() => setActiveTab("description")}
               className={`flex-1 sm:flex-none sm:w-48 h-12 rounded-lg font-bold text-sm sm:text-lg transition-colors ${
@@ -120,6 +111,16 @@ export default function ProductViewPage() {
               }`}
             >
               Description
+            </button>
+             <button
+              onClick={() => setActiveTab("specifications")}
+              className={`flex-1 sm:flex-none sm:w-48 h-12 rounded-lg font-bold text-sm sm:text-lg transition-colors ${
+                activeTab === "specifications"
+                  ? "bg-red-500 hover:bg-red-600 text-white"
+                  : "bg-gray-300 hover:bg-gray-400 text-black"
+              }`}
+            >
+              Specifications
             </button>
             <button
               onClick={() => setActiveTab("reviews")}
@@ -212,7 +213,7 @@ export default function ProductViewPage() {
       {/* Review Sidebar */}
       {showReviewBox && (
         <div className="flex justify-center pt-6 lg:pt-5">
-          <div className="w-full max-w-lg bg-[#FAF8F2] p-4 rounded-lg shadow-md h-fit">
+          <div className="w-full max-w-lg p-4 rounded-lg shadow-md h-fit">
             <h3 className="text-lg font-semibold mb-3">Write a Review</h3>
 
             <p className="font-medium text-base pb-1">Your Review</p>

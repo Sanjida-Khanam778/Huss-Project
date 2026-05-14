@@ -74,7 +74,7 @@ export const MyOrders = () => {
   }
 
   return (
-    <div className="w-full bg-[#f9f6ee] px-4 sm:px-6 lg:px-8 xl:px-28 py-3 min-h-screen">
+    <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-28 py-3 min-h-screen">
       <ScrollRestoration />
       {/* Breadcrumb */}
       <div className="text-left font-medium mb-6">
