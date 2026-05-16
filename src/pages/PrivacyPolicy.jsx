@@ -6,7 +6,7 @@ const PrivacyPolicy = () => {
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-[#FAF8F2]">
+      <div className="flex items-center justify-center min-h-screen">
         <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-gray-900"></div>
       </div>
     );
@@ -14,7 +14,7 @@ const PrivacyPolicy = () => {
 
   if (isError) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-[#FAF8F2]">
+      <div className="flex items-center justify-center min-h-screen">
         <p className="text-red-500 text-xl font-semibold">
           Error loading privacy policy. Please try again later.
         </p>
@@ -25,7 +25,7 @@ const PrivacyPolicy = () => {
   const policyContent = data?.content || "No privacy policy found.";
 
   return (
-    <section className="px-4 sm:px-6 md:px-12 lg:px-24 py-12 bg-[#FAF8F2] text-gray-800 min-h-screen">
+    <section className="px-4 sm:px-6 md:px-12 lg:px-24 py-12 text-gray-800 min-h-screen">
       <ScrollRestoration />
       <div className="max-w-5xl mx-auto">
         <nav className="text-xs sm:text-sm text-gray-500 mb-4">

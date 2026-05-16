@@ -97,11 +97,9 @@ export default function ProductViewPage() {
       {/* Left Main Section */}
       <div className="flex-1 justify-center w-full">
         <ProductImgDet product={product} isLoading={isLoading} />
-
         {/* Tabs */}
         <div className="mt-10 rounded-lg bg-white p-2 sm:p-3">
           <div className="flex flex-wrap gap-2 sm:gap-4">
-           
             <button
               onClick={() => setActiveTab("description")}
               className={`flex-1 sm:flex-none sm:w-48 h-12 rounded-lg font-bold text-sm sm:text-lg transition-colors ${
