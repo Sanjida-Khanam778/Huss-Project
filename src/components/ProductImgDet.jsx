@@ -6,14 +6,32 @@ import {
 } from "../redux/api/authApi";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
+import { useEffect, useMemo, useState } from "react";
 
 export const ProductImgDet = ({ product, isLoading }) => {
   const navigate = useNavigate();
   const [addToCart, { isLoading: isAdding }] = useAddToCartMutation();
   const [toggleWishlist] = useToggleWishlistMutation();
-
+  const [selectedImage, setSelectedImage] = useState(Headphone);
+ const descriptionHtml =
+    product?.description?.replace(/&nbsp;/g, " ") ||
+    "<p>No description available for this product.</p>";
   // Check if user is logged in
   const isAuthenticated = useSelector((state) => state.auth?.access);
+  const productImages = useMemo(() => {
+    if (!product) return [];
+
+    const images = [
+      product.image,
+      ...(product.images || []).map((item) => item.image),
+    ].filter(Boolean);
+
+    return images.length > 0 ? images : [Headphone];
+  }, [product]);
+
+  useEffect(() => {
+    setSelectedImage(productImages[0] || Headphone);
+  }, [productImages]);
 
   const handleAddToCart = async () => {
     if (!product) return;
@@ -84,16 +102,27 @@ export const ProductImgDet = ({ product, isLoading }) => {
       {/* Product Images */}
       <div className="flex flex-col gap-5 w-full lg:w-1/2">
         <img
-          src={product.image ? `${product.image}` : Headphone}
+          src={selectedImage}
           alt={product.product_name}
           className="rounded-xl w-fit h-[300px] sm:h-[400px] object-contain bg-gray-100 p-6 border"
         />
-        <div className="flex gap-2 justify-center sm:justify-start">
-          <img
-            src={product.image ? `${product.image}` : Headphone}
-            alt="thumbnail"
-            className="w-16 h-16 sm:w-24 sm:h-24 object-contain rounded-md overflow-hidden cursor-pointer border-2 border-[#D5B56E] bg-white "
-          />
+        <div className="flex gap-2 justify-center sm:justify-start flex-wrap">
+          {productImages.map((image, index) => (
+            <button
+              key={`${image}-${index}`}
+              type="button"
+              onClick={() => setSelectedImage(image)}
+              className={`w-16 h-16 sm:w-24 sm:h-24 rounded-md overflow-hidden cursor-pointer border-2 bg-white ${
+                selectedImage === image ? "border-[#D5B56E]" : "border-gray-200"
+              }`}
+            >
+              <img
+                src={image}
+                alt={`${product.product_name} thumbnail ${index + 1}`}
+                className="w-full h-full object-contain"
+              />
+            </button>
+          ))}
         </div>
       </div>
 
@@ -130,15 +159,13 @@ export const ProductImgDet = ({ product, isLoading }) => {
           ({product.review_count || 0} reviews)
         </p>
 
-        <h2 className="mt-4 font-bold text-base">Description:</h2>
+        <h2 className="mt-4 font-bold">Description:</h2>
         <div
-          className="text-sm text-gray-700 mt-1"
-          dangerouslySetInnerHTML={{
-            __html:
-              product.description ||
-              "<p>No description available for this product.</p>",
-          }}
-        />
+              className="text-base text-gray-700 leading-relaxed [&_p]:mb-3 [&_p:empty]:hidden [&_p:last-child]:mb-0 [&_strong]:font-bold [&_ol]:list-decimal [&_ol]:pl-8 [&_ol]:my-3 [&_ul]:list-disc [&_ul]:pl-8 [&_ul]:my-3 [&_li]:pl-1 [&_li]:mb-1 [&_li]:leading-relaxed"
+              dangerouslySetInnerHTML={{
+                __html: descriptionHtml,
+              }}
+            />
 
         <div className="flex flex-col min-[420px]:flex-row w-full gap-3 mt-6 text-white">
           <button

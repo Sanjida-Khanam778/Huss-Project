@@ -13,6 +13,9 @@ export default function ProductViewPage() {
   const { data: product, isLoading, error } = useGetProductDetailsQuery(id);
   const [addReview, { isLoading: isSubmitting }] = useAddReviewMutation();
   const specifications = product?.specifications || [];
+  const descriptionHtml =
+    product?.description?.replace(/&nbsp;/g, " ") ||
+    "<p>No description available for this product.</p>";
 
   const [showReviewBox, setShowReviewBox] = useState(false);
   const [activeTab, setActiveTab] = useState("description");
@@ -172,11 +175,9 @@ export default function ProductViewPage() {
               {product?.product_name}
             </h3>
             <div
-              className="text-base sm:text-lg text-gray-700 leading-relaxed"
+              className="text-base sm:text-lg text-gray-700 leading-relaxed [&_p]:mb-3 [&_p:empty]:hidden [&_p:last-child]:mb-0 [&_strong]:font-bold [&_ol]:list-decimal [&_ol]:pl-8 [&_ol]:my-3 [&_ul]:list-disc [&_ul]:pl-8 [&_ul]:my-3 [&_li]:pl-1 [&_li]:mb-1 [&_li]:leading-relaxed"
               dangerouslySetInnerHTML={{
-                __html:
-                  product.description ||
-                  "<p>No description available for this product.</p>",
+                __html: descriptionHtml,
               }}
             />
           </div>
