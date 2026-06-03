@@ -61,7 +61,9 @@ const ProductsSection = () => {
       toast.success(response.message || "Wishlist updated.");
       navigate("/wishlist");
     } catch (error) {
-      toast.error(error?.data?.message || error?.data?.detail || "Something went wrong.");
+      toast.error(
+        error?.data?.message || error?.data?.detail || "Something went wrong.",
+      );
     }
   };
 
@@ -103,7 +105,9 @@ const ProductsSection = () => {
         <div className="max-w-7xl mx-auto">
           <div className="text-center text-gray-900 mt-10 py-12">
             <p className="text-lg font-semibold">No products found.</p>
-            <p className="text-gray-600 mt-2">Try searching with different keywords.</p>
+            <p className="text-gray-600 mt-2">
+              Try searching with different keywords.
+            </p>
           </div>
         </div>
       )}
@@ -126,11 +130,8 @@ const ProductsSection = () => {
 
               {/* Image */}
               <img
-                src={
-                  product.image
-                    ? `${product.image}`
-                    : Headphone
-                }
+                src={`
+                 ${product.images[0]?.image|| product.image}`}
                 alt={product.product_name}
                 className="w-full h-52 object-contain p-4 cursor-pointer bg-gray-100 rounded-xl "
                 onClick={() => navigate(`/products/${product.id}/detail`)}
