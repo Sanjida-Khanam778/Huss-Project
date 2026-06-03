@@ -10,6 +10,11 @@ import {
 } from "../../redux/api/authApi";
 import { toast } from "react-toastify";
 
+const getDescriptionHtml = (description) =>
+  description
+    ? description.replace(/&nbsp;/g, " ")
+    : "No description available.";
+
 const ProductsSection = () => {
   const navigate = useNavigate();
   const searchTerm = useSelector((state) => state.product.searchTerm);
@@ -123,7 +128,7 @@ const ProductsSection = () => {
               <img
                 src={
                   product.image
-                    ? `${import.meta.env.VITE_BASE_URL_MEDIA}${product.image}`
+                    ? `${product.image}`
                     : Headphone
                 }
                 alt={product.product_name}
@@ -136,9 +141,12 @@ const ProductsSection = () => {
                 <h3 className="text-base font-semibold text-gray-800 mb-1 line-clamp-1">
                   {product.product_name}
                 </h3>
-                <p className="text-sm text-gray-600 flex-grow line-clamp-2">
-                  {product?.description || "No description available."}
-                </p>
+                <div
+                  className="text-sm text-gray-600 flex-grow line-clamp-2"
+                  dangerouslySetInnerHTML={{
+                    __html: getDescriptionHtml(product?.description),
+                  }}
+                />
                 <div className="mt-4 flex items-center justify-between">
                   <span className="text-sm font-semibold text-gray-900">
                     ${product.price}

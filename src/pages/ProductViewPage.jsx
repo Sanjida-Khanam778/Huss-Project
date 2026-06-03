@@ -12,6 +12,7 @@ export default function ProductViewPage() {
   const { id } = useParams();
   const { data: product, isLoading, error } = useGetProductDetailsQuery(id);
   const [addReview, { isLoading: isSubmitting }] = useAddReviewMutation();
+  const specifications = product?.specifications || [];
 
   const [showReviewBox, setShowReviewBox] = useState(false);
   const [activeTab, setActiveTab] = useState("description");
@@ -110,7 +111,7 @@ export default function ProductViewPage() {
             >
               Description
             </button>
-             <button
+            <button
               onClick={() => setActiveTab("specifications")}
               className={`flex-1 sm:flex-none sm:w-48 h-12 rounded-lg font-bold text-sm sm:text-lg transition-colors ${
                 activeTab === "specifications"
@@ -139,32 +140,27 @@ export default function ProductViewPage() {
             <h1 className="font-semibold text-lg sm:text-xl">
               Product Specifications
             </h1>
-            <div className="flex flex-col md:flex-row gap-4 mt-4 w-full text-sm sm:text-base">
-              <div className="flex flex-col w-full md:w-1/2">
-                <div className="flex justify-between pb-2 border-b border-gray-300 mb-2">
-                  <p>Material</p>
-                  <p>Plastic</p>
-                </div>
-                <div className="flex justify-between pb-2 border-b border-gray-300 mb-2">
-                  <p>Color</p>
-                  <p>Navy</p>
-                </div>
-                <div className="flex justify-between pb-2 border-b border-gray-300 mb-2">
-                  <p>Weight</p>
-                  <p>4 KG</p>
-                </div>
+            {specifications.length > 0 ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 mt-4 w-full text-sm sm:text-base">
+                {specifications.map((specification) => (
+                  <div
+                    key={specification.id || specification.key}
+                    className="flex justify-between gap-4 pb-2 border-b border-gray-300 mb-2"
+                  >
+                    <p className="font-medium text-gray-700">
+                      {specification.key}
+                    </p>
+                    <p className="text-right text-gray-900">
+                      {specification.value}
+                    </p>
+                  </div>
+                ))}
               </div>
-              <div className="flex flex-col w-full md:w-1/2">
-                <div className="flex justify-between pb-2 border-b border-gray-300 mb-2">
-                  <p>Warranty</p>
-                  <p>2 Years Limited</p>
-                </div>
-                <div className="flex justify-between pb-2 border-b border-gray-300 mb-2">
-                  <p>Country of Origin</p>
-                  <p>Italy</p>
-                </div>
-              </div>
-            </div>
+            ) : (
+              <p className="mt-4 text-sm sm:text-base text-gray-600">
+                No specifications available for this product.
+              </p>
+            )}
           </div>
         )}
 
@@ -175,10 +171,14 @@ export default function ProductViewPage() {
             <h3 className="font-semibold text-lg sm:text-xl my-2">
               {product?.product_name}
             </h3>
-            <p className="text-base sm:text-lg text-gray-700 leading-relaxed">
-              {product?.description ||
-                "No description available for this product."}
-            </p>
+            <div
+              className="text-base sm:text-lg text-gray-700 leading-relaxed"
+              dangerouslySetInnerHTML={{
+                __html:
+                  product.description ||
+                  "<p>No description available for this product.</p>",
+              }}
+            />
           </div>
         )}
 

@@ -84,21 +84,13 @@ export const ProductImgDet = ({ product, isLoading }) => {
       {/* Product Images */}
       <div className="flex flex-col gap-5 w-full lg:w-1/2">
         <img
-          src={
-            product.image
-              ? `${import.meta.env.VITE_BASE_URL_MEDIA}${product.image}`
-              : Headphone
-          }
+          src={product.image ? `${product.image}` : Headphone}
           alt={product.product_name}
           className="rounded-xl w-fit h-[300px] sm:h-[400px] object-contain bg-gray-100 p-6 border"
         />
         <div className="flex gap-2 justify-center sm:justify-start">
           <img
-            src={
-              product.image
-                ? `${import.meta.env.VITE_BASE_URL_MEDIA}${product.image}`
-                : Headphone
-            }
+            src={product.image ? `${product.image}` : Headphone}
             alt="thumbnail"
             className="w-16 h-16 sm:w-24 sm:h-24 object-contain rounded-md overflow-hidden cursor-pointer border-2 border-[#D5B56E] bg-white "
           />
@@ -139,9 +131,14 @@ export const ProductImgDet = ({ product, isLoading }) => {
         </p>
 
         <h2 className="mt-4 font-bold text-base">Description:</h2>
-        <p className="text-sm text-gray-700 mt-1 line-clamp-4">
-          {product.description || "No description available for this product."}
-        </p>
+        <div
+          className="text-sm text-gray-700 mt-1"
+          dangerouslySetInnerHTML={{
+            __html:
+              product.description ||
+              "<p>No description available for this product.</p>",
+          }}
+        />
 
         <div className="flex flex-col min-[420px]:flex-row w-full gap-3 mt-6 text-white">
           <button

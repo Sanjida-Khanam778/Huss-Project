@@ -14,7 +14,7 @@ export const MyCart = () => {
   }
 
   return (
-    <div className="py-16 bg-[#f9f6ee]">
+    <div className="py-16">
       <ScrollRestoration />
       {/* Header */}
       <div className="text-start mb-10">
