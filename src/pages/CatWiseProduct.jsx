@@ -1,4 +1,5 @@
 import { useState } from "react";
+import DOMPurify from "dompurify";
 import left from "../assets/img/left-angle.png";
 import right from "../assets/img/right-angle.png";
 import { ScrollRestoration, useNavigate, useParams } from "react-router-dom";
@@ -141,7 +142,7 @@ const CatWiseProduct = () => {
             >
               {/* Product Image */}
               <img
-                src={getImageUrl(product.image)}
+                src={product.images[0].image}
                 alt={product.product_name}
                 className="h-48 w-full object-contain bg-gray-50 rounded-t-lg mb-4 cursor-pointer"
                 onClick={() => navigate(`/products/${product.id}/detail`)}
@@ -154,9 +155,12 @@ const CatWiseProduct = () => {
 
               {/* Product Description */}
               {product.description && (
-                <p className="text-sm text-gray-600 mb-4 px-4 line-clamp-3">
-                  {product.description}
-                </p>
+                <div
+                  className="text-sm text-gray-600 mb-4 px-4 line-clamp-3"
+                  dangerouslySetInnerHTML={{
+                    __html: DOMPurify.sanitize(product.description),
+                  }}
+                />
               )}
 
               {/* Stock Status */}
